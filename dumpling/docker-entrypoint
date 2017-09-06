@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -eu
+
+# Add users from the host - if bind mounted.
+if [ -r /etc/passwd.host ]; then
+  grep -E ':2[0-9]{3}': /etc/passwd.host >> /etc/passwd
+fi
+
+# Add groups from the host - if bind mounted.
+if [ -r /etc/group.host ]; then
+  grep -E ':2[0-9]{3}': /etc/group.host >> /etc/group
+fi
+
+# Switch to USER - if environment variable defined.
+# Run sudo when calling apt or pip by creating wrapper scripts
+# in /usr/local/bin that call the real script with sudo.
+if [ -n "${USER-}" ]; then
+  usermod -a -G sudo "$USER"
+  echo '#!/bin/sh\nsudo /usr/bin/apt update && exec sudo /usr/bin/apt "$@"' > /usr/local/bin/apt
+  chmod +x /usr/local/bin/apt
+  echo '#!/bin/sh\nexec sudo /usr/bin/pip3 "$@"' > /usr/local/bin/pip3
+  chmod +x /usr/local/bin/pip3
+  ln -fs pip3 /usr/local/bin/pip
+  cd "$(getent passwd "$USER" | cut -d: -f6)"
+  exec gosu "$USER" "$@"
+else
+  exec "$@"
+fi
