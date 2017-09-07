@@ -13,9 +13,11 @@ if [ -z "${SSH_AUTH_SOCK-}" ]; then
   eval "$(ssh-agent)" > /dev/null
 fi
 
+docker pull nyag/dumpling > /dev/null
+
 exec docker run -it --rm \
   -v /home:/home \
   -v /etc/passwd:/etc/passwd.host -v /etc/group:/etc/group.host \
   -v "${SSH_AUTH_SOCK}":/tmp/ssh -e SSH_AUTH_SOCK=/tmp/ssh \
   -e USER="${SUDO_USER-$USER}" \
-  dumpling "$@"
+  nyag/dumpling "$@"

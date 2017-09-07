@@ -9,7 +9,7 @@ before_install:
 
 script:
   - export PATH="$(pwd)/bin:$PATH"
-  - docker build -t dumpling dumpling
+  - docker build -t nyag/dumpling dumpling
   - dumpling whoami | grep "$(whoami)"
   - dumpling python -c "import numpy as np; assert np.array([1]) + np.array([1]) == 2"
   - dumpling bash -c 'pip install jenkspy && python -c "import jenkspy"'
