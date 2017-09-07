@@ -98,6 +98,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        p7zip-full \
        postgresql-client \
        procps \
+       sl \
        sudo \
        tree \
        vim \
@@ -110,11 +111,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Enable sudo without a password.
 # Modify bashrc to enable bash-completion and other savories.
 # Enable git pull rebase autostash.
+# Add /usr/games to PATH to support cowsay and sl.
 # TODO: colorify prompt and add git branch name to prompt.
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/nopasswd \
     && echo '. /usr/share/bash-completion/bash_completion' >> /etc/bash.bashrc \
-    && echo '/usr/games/cowsay -f tux "Happy Coding!"' >> /etc/bash.bashrc
+    && echo 'cowsay -f tux "Happy Coding!"' >> /etc/bash.bashrc
 COPY gitconfig /etc/
+ENV PATH $PATH:/usr/games
 
 # Step 5 - Serve the chopsticks.
 # Use an entrypoint script to add users from host to the container.
