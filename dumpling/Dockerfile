@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Create a symlink from python/pip to Python 3, 
+# Create a symlink from python/pip to Python 3,
 # since we are not using Python 2.
 RUN ln -s ../../bin/python3 /usr/local/bin/python \
     && ln -s ../../bin/pip3 /usr/local/bin/pip
