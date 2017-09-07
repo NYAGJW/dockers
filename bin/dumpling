@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Run a shell in the dumpling Docker container as the host user
+# with some features accessible from within the container:
+#
+#   * home directories
+#   * users and groups
+#   * ssh private key identities (e.g., for git)
+
+set -eu
+
+if [ -z "${SSH_AUTH_SOCK-}" ]; then
+  eval "$(ssh-agent)" > /dev/null
+fi
+
+exec docker run -it --rm \
+  -v /home:/home \
+  -v /etc/passwd:/etc/passwd.host -v /etc/group:/etc/group.host \
+  -v "${SSH_AUTH_SOCK}":/tmp/ssh -e SSH_AUTH_SOCK=/tmp/ssh \
+  -e USER="${SUDO_USER-$USER}"
+  dumpling "$@"

@@ -3,10 +3,13 @@ sudo: required
 services:
   - docker
 
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y openssh-client
+
 script:
-  - id
-  - getent passwd
+  - export PATH="$(pwd)/bin:$PATH"
   - docker build -t dumpling dumpling
-  - docker run --rm dumpling echo SUCCESS | grep SUCCESS
-  - docker run --rm dumpling python -c "import numpy as np; assert np.array([1]) + np.array([1]) == 2"
-  - docker run --rm dumpling bash -c 'pip install jenkspy && python -c "import jenkspy"'
+  - dumpling echo SUCCESS | grep SUCCESS
+  - dumpling python -c "import numpy as np; assert np.array([1]) + np.array([1]) == 2"
+  - dumpling bash -c 'pip install jenkspy && python -c "import jenkspy"'
