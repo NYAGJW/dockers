@@ -2,10 +2,12 @@ FROM debian:stretch
 
 # Step 1 - Prepare the dough for the dumpling.
 # Install Python development tools, compilers, and build dependencies.
+# bzip2, tar, wget are needed to download phantomjs.
 # unixodbc-dev is needed to build pyodbc.
 # GDAL depends on specific versions of its C/C++ libraries, so just
 # install the Debian package instead of building from source.
 RUN apt-get update && apt-get install -y --no-install-recommends \
+       bzip2 \
        g++ \
        gcc \
        python3-dev \
@@ -13,8 +15,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        python3-pip \
        python3-setuptools \
        python3-wheel \
+       tar \
        unixodbc-dev \
        virtualenv \
+       wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -25,6 +29,10 @@ RUN ln -s ../../bin/python3 /usr/local/bin/python \
 
 # Step 2 - Pack the dumpling with lots of veggies and steam it.
 # Install lots of Python packages for data science.
+# Install PhantomJS as a Selenium WebDriver.
+# TODO: automatically find the latest version of PhantomJS.
+# It would be nice to use the Debian package but there are bugs:
+# https://bugs.debian.org/cgi-bin/pkgreport.cgi?package=phantomjs
 RUN pip3 install --no-cache-dir \
         beautifulsoup4 \
         bokeh \
@@ -61,6 +69,7 @@ RUN pip3 install --no-cache-dir \
         scipy \
         scrapy \
         seaborn \
+        selenium \
         shapely \
         six \
         sqlalchemy \
@@ -71,7 +80,10 @@ RUN pip3 install --no-cache-dir \
         tox \
         unidecode \
         xmltodict \
-    && true
+    && wget -O phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 \
+    && tar --wildcards --strip-components=2 -xf phantomjs.tar.bz2 'phantomjs*/bin/phantomjs' \
+    && mv phantomjs /usr/local/bin \
+    && rm phantomjs.tar.bz2
 
 # Step 3 - Add some dipping sauce to the dumpling.
 # Install Debian packages for convenient CLI work.
@@ -103,7 +115,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        tree \
        vim \
        watch \
-       wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
