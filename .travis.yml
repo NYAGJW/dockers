@@ -1,0 +1,12 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  - id
+  - getent passwd
+  - docker build -t dumpling dumpling
+  - docker run --rm dumpling echo SUCCESS | grep SUCCESS
+  - docker run --rm dumpling python -c "import numpy as np; assert np.array([1]) + np.array([1]) == 2"
+  - docker run --rm dumpling bash -c 'pip install jenkspy && python -c "import jenkspy"'
