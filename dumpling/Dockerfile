@@ -27,7 +27,9 @@ RUN ln -s ../../bin/python3 /usr/local/bin/python \
 # Install lots of Python packages for data science.
 RUN pip3 install --no-cache-dir \
         beautifulsoup4 \
+        bokeh \
         civis \
+        dash \
         emoji \
         Fiona \
         folium \
@@ -47,6 +49,7 @@ RUN pip3 install --no-cache-dir \
         pandas-datareader \
         pdfminer.six \
         Pillow \
+        plotly \
         pre-commit \
         probablepeople \
         pyodbc \
@@ -57,6 +60,7 @@ RUN pip3 install --no-cache-dir \
         scikit-learn \
         scipy \
         scrapy \
+        seaborn \
         shapely \
         six \
         sqlalchemy \
