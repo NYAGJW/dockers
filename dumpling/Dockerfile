@@ -3,6 +3,7 @@ FROM debian:stretch
 # Step 1 - Prepare the dough for the dumpling.
 # Install Python development tools, compilers, and build dependencies.
 # bzip2, tar, wget are needed to download phantomjs.
+# git is needed to download oaglib.
 # unixodbc-dev is needed to build pyodbc.
 # GDAL depends on specific versions of its C/C++ libraries, so just
 # install the Debian package instead of building from source.
@@ -10,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        bzip2 \
        g++ \
        gcc \
+       git \
        python3-dev \
        python3-gdal \
        python3-pip \
@@ -80,6 +82,7 @@ RUN pip3 install --no-cache-dir \
         tox \
         unidecode \
         xmltodict \
+        git+https://github.com/NYAG/oaglib.git \
     && wget -O phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 \
     && tar --wildcards --strip-components=2 -xf phantomjs.tar.bz2 'phantomjs*/bin/phantomjs' \
     && mv phantomjs /usr/local/bin \
@@ -94,7 +97,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        cowsay \
        curl \
        dnsutils \
-       git \
        ghostscript \
        gosu \
        host \
