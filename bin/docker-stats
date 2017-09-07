@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Print docker stats with container names instead of container IDs.
+# docker stats shows CPU and memory usage per container, etc.
+
+set -eu
+
+exec docker stats $(docker ps --format={{.Names}}) "$@"
