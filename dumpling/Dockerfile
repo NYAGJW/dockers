@@ -110,10 +110,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Step 4 - Indulge in the dumpling.
 # Enable sudo without a password.
 # Modify bashrc to enable bash-completion and other savories.
+# Enable git pull rebase autostash.
 # TODO: colorify prompt and add git branch name to prompt.
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/nopasswd \
     && echo '. /usr/share/bash-completion/bash_completion' >> /etc/bash.bashrc \
     && echo '/usr/games/cowsay -f tux "Happy Coding!"' >> /etc/bash.bashrc
+COPY gitconfig /etc/
 
 # Step 5 - Serve the chopsticks.
 # Use an entrypoint script to add users from host to the container.
