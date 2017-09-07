@@ -17,5 +17,5 @@ exec docker run -it --rm \
   -v /home:/home \
   -v /etc/passwd:/etc/passwd.host -v /etc/group:/etc/group.host \
   -v "${SSH_AUTH_SOCK}":/tmp/ssh -e SSH_AUTH_SOCK=/tmp/ssh \
-  -e USER="${SUDO_USER-$USER}"
+  -e USER="${SUDO_USER-$USER}" \
   dumpling "$@"
