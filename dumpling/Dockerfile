@@ -3,16 +3,14 @@ FROM debian:stretch
 # Step 1 - Prepare the dough for the dumpling.
 # Install Python development tools, compilers, and build dependencies.
 # unixodbc-dev is needed to build pyodbc.
-# GDAL and pygraphviz depend on specific versions of their
-# C/C++ libraries, so just install their Debian packages.
-# instead of building them from source.
+# GDAL depends on specific versions of its C/C++ libraries, so just
+# install the Debian package instead of building from source.
 RUN apt-get update && apt-get install -y --no-install-recommends \
        g++ \
        gcc \
        python3-dev \
        python3-gdal \
        python3-pip \
-       python3-pygraphviz \
        python3-setuptools \
        python3-wheel \
        unixodbc-dev \
@@ -27,8 +25,6 @@ RUN ln -s ../../bin/python3 /usr/local/bin/python \
 
 # Step 2 - Pack the dumpling with lots of veggies and steam it.
 # Install lots of Python packages for data science.
-# We should prune this list to the packages we commonly work with.
-# Should we also install seaborn, bokeh, kera, theano?
 RUN pip3 install --no-cache-dir \
         beautifulsoup4 \
         civis \
@@ -46,7 +42,6 @@ RUN pip3 install --no-cache-dir \
         nbdiff \
         neo4j-driver \
         nltk \
-        numexpr \
         numpy \
         pandas \
         pandas-datareader \
