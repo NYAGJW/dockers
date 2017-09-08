@@ -13,10 +13,10 @@ if [ -z "${SSH_AUTH_SOCK-}" ]; then
   eval "$(ssh-agent)" > /dev/null
 fi
 
-# Update Docker image unless a local build exists, e.g., when testing.
+# Update Docker image unless running in Travis CI.
 # Also, since a --quiet option does not exist, hide the output
 # that is otherwise displayed when the local copy is up-to-date.
-if ! docker images | grep -q ^nyag/dumpling; then
+if [ "${CI-}" != true ]; then
   docker pull nyag/dumpling | \
   grep -v -e '^Using default tag' -e '^Trying to pull' \
   -e '^latest' -e '^Digest' && true
