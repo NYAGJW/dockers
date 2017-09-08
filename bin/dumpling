@@ -13,7 +13,11 @@ if [ -z "${SSH_AUTH_SOCK-}" ]; then
   eval "$(ssh-agent)" > /dev/null
 fi
 
-docker pull nyag/dumpling > /dev/null
+# Update Docker image unless local build exists, e.g.,
+# when testing with Travis CI.
+if ! docker images | grep -q ^nyag/dumpling; then
+  docker pull nyag/dumpling > /dev/null
+fi
 
 exec docker run -it --rm \
   -v /home:/home \
