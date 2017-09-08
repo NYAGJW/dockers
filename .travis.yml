@@ -12,5 +12,6 @@ script:
   - docker build -t nyag/dumpling dumpling
   - dumpling whoami | grep "$(whoami)"
   - dumpling python -c "import numpy as np; assert np.array([1]) + np.array([1]) == 2"
+  - dumpling python -c "import oaglib"
   - dumpling bash -c 'pip install jenkspy && python -c "import jenkspy"'
   - dumpling python -c "from selenium import webdriver; driver = webdriver.PhantomJS(); driver.get('https://www.google.com/'); driver.save_screenshot('test.png')"
