@@ -1,14 +1,10 @@
 FROM debian:stretch
 
 # Follow the cookbook to make the dumpling!
-COPY docker-build /srv/
+COPY bashrc docker-build docker-entrypoint gitconfig /srv/
 RUN /srv/docker-build
 
-# Enable git pull rebase autostash.
-COPY gitconfig /etc/
-
 # Serve the chopsticks.
-# Use an entrypoint script to add users from host to the container.
-COPY docker-entrypoint /usr/local/bin/
-ENTRYPOINT ["docker-entrypoint"]
+# Use the entrypoint script to add users from host to the container.
+ENTRYPOINT ["/srv/docker-entrypoint"]
 CMD ["bash"]

@@ -23,8 +23,7 @@ apt-get install -qy --no-install-recommends \
    tar \
    unixodbc-dev \
    virtualenv \
-   wget \
-&& true
+   wget
 
 # Create a symlink from python/pip to Python 3,
 # since we are not using Python 2.
@@ -80,8 +79,7 @@ pip3 install --no-cache-dir \
     tox \
     unidecode \
     xmltodict \
-    git+https://github.com/NYAG/oaglib.git \
-&& true
+    git+https://github.com/NYAG/oaglib.git
 
 # Install PhantomJS as a Selenium WebDriver.
 # TODO: automatically find the latest version of PhantomJS.
@@ -122,18 +120,17 @@ apt-get install -qy --no-install-recommends \
    sudo \
    tree \
    vim \
-   watch \
-&& true
+   watch
 
 # Step 4 - Indulge in the dumpling.
 # Enable sudo without a password.
 echo '%sudo ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/nopasswd
 
 # Modify bashrc to enable bash-completion and other savories.
-# TODO: colorify prompt and add git branch name to prompt.
-echo '. /usr/share/bash-completion/bash_completion' >> /etc/bash.bashrc
-echo 'export PATH="$PATH:/usr/games"' >> /etc/bash.bashrc
-echo 'cowsay -f tux "Happy Coding!"' >> /etc/bash.bashrc
+# Enable git pull rebase autostash.
+echo '. /srv/bashrc' >> /etc/bash.bashrc
+echo '. /srv/bash_logout' >> /etc/bash.bash.logout
+ln -s /srv/gitconfig /etc/gitconfig
 
 # Step 5 - Clean the dishes.
 apt-get clean

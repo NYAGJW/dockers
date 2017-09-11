@@ -24,7 +24,7 @@ fi
 
 user="${SUDO_USER-$USER}"
 docker run -it --rm \
-  -v /home:/home \
+  -v /home:/home -v /etc/localtime:/etc/localtime \
   -v /etc/passwd:/etc/passwd.host -v /etc/group:/etc/group.host \
   -v "${SSH_AUTH_SOCK}":/tmp/ssh -e SSH_AUTH_SOCK=/tmp/ssh \
   --name "${user}-dumpling" \
