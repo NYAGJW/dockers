@@ -22,9 +22,12 @@ if [ "${CI-}" != true ]; then
   -e '^latest' -e '^Digest' && true
 fi
 
-exec docker run -it --rm \
+user="${SUDO_USER-$USER}"
+docker run -it --rm \
   -v /home:/home \
   -v /etc/passwd:/etc/passwd.host -v /etc/group:/etc/group.host \
   -v "${SSH_AUTH_SOCK}":/tmp/ssh -e SSH_AUTH_SOCK=/tmp/ssh \
-  -e USER="${SUDO_USER-$USER}" \
-  nyag/dumpling "$@"
+  --name "${user}-dumpling" \
+  -e "USER=${user}" \
+  nyag/dumpling "$@" \
+|| docker exec -it -u "$user" "${user}-dumpling"  /bin/bash
