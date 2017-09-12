@@ -1,5 +1,6 @@
 # Enable bash completion.
 . /usr/share/bash-completion/bash_completion
+complete -C aws_completer aws
 
 # Color terminal prompt with virtualenv and git branch information.
 [ -e "$(which vex)" ] && eval "$(vex --shell-config bash)"
