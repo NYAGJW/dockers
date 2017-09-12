@@ -101,6 +101,9 @@ apt-get install -qy --no-install-recommends \
    cowsay \
    curl \
    dnsutils \
+   fortune-mod \
+   fortunes \
+   fortunes-bofh-excuses \
    ghostscript \
    gosu \
    host \
