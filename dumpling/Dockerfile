@@ -1,7 +1,7 @@
 FROM debian:stretch
 
 # Follow the cookbook to make the dumpling!
-COPY bashrc docker-build docker-entrypoint gitconfig /srv/
+COPY * /srv/
 RUN /srv/docker-build
 
 # Serve the chopsticks.

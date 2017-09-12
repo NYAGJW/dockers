@@ -131,9 +131,12 @@ echo '%sudo ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/nopasswd
 
 # Modify bashrc to enable bash-completion and other savories.
 # Enable git pull rebase autostash.
+# Configure Jupyter Notebook port.
 echo '. /srv/bashrc' >> /etc/bash.bashrc
 echo '. /srv/bash_logout' >> /etc/bash.bash.logout
-ln -s /srv/gitconfig /etc/gitconfig
+ln -s /srv/gitconfig /etc/.
+mkdir /etc/jupyter
+ln -s /srv/jupyter_notebook_config.py /etc/jupyter/.
 
 # Step 5 - Clean the dishes.
 apt-get clean
