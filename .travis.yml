@@ -15,3 +15,4 @@ script:
   - dumpling python -c "import oaglib"
   - dumpling bash -c 'pip install jenkspy && python -c "import jenkspy"'
   - dumpling python -c "from selenium import webdriver; driver = webdriver.PhantomJS(); driver.get('https://www.google.com/'); driver.save_screenshot('test.png')"
+  - dumpling bash -c 'mkdir -p ~/.aws && echo -e "[default]\naws_access_key_id = dummy\naws_secret_access_key = dummy" > ~/.aws/credentials && aws s3 ls s3://irs-form-990/' | grep InvalidAccessKeyId
