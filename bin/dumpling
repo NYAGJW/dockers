@@ -27,13 +27,16 @@ name="${user}-dumpling"
 if [ -n "$(docker ps -q -f "name=${name}")" ]; then
     exec docker exec -it -u "$user" "$name" /bin/bash
 else
-    exec docker run -it --rm --network host \
-      --cap-add SYS_ADMIN --cap-add DAC_READ_SEARCH \
-      -v /home:/home -v /etc/localtime:/etc/localtime \
-      -v /etc/passwd:/etc/passwd.host -v /etc/group:/etc/group.host \
-      -v /srv/cifs:/srv/cifs \
-      -v "${SSH_AUTH_SOCK}":/tmp/ssh -e SSH_AUTH_SOCK=/tmp/ssh \
-      -e "USER=${user}" --name "$name" \
+    exec docker run -it --rm --name "$name" \
+      --network host --cap-add SYS_ADMIN --cap-add DAC_READ_SEARCH \
+      -v /home:/home \
+      -v /etc/group:/etc/group.host:ro \
+      -v /etc/localtime:/etc/localtime:ro \
+      -v /etc/passwd:/etc/passwd.host:ro \
+      -v /srv/cifs:/srv/cifs:ro \
+      -v "${SSH_AUTH_SOCK}":/tmp/ssh \
+      -e SSH_AUTH_SOCK=/tmp/ssh \
+      -e "USER=${user}" \
       -e PORT1 -e PORT2 -e PORT3 -e PORT4 -e BOLTPORT -e NEOPORT \
       nyag/dumpling "$@"
 fi
