@@ -22,7 +22,7 @@ if [ -r /srv/cifs/mounts ]; then
     options="$(echo "$line" | cut -d: -f3)"
     mkdir "$mountpoint"
     mount -t cifs \
-      -o "credentials=/srv/cifs/credentials,noperm,${options}" \
+      -o "vers=2.0,credentials=/srv/cifs/credentials,noperm,${options}" \
       "$service" "$mountpoint" || true
   done < /srv/cifs/mounts
 fi
