@@ -95,9 +95,12 @@ rm phantomjs.tar.bz2
 
 # Step 3 - Add some dipping sauce to the dumpling.
 # Install Debian packages for convenient CLI work.
+# bash-completion, cowsay, fortune* are used in bashrc.
+# cifs-utils, gosu are used in docker-entrypoint.
 apt-get install -qy --no-install-recommends \
    bash-completion \
    bc \
+   cifs-utils \
    cowsay \
    curl \
    dnsutils \

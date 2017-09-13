@@ -12,6 +12,19 @@ if [ -r /etc/group.host ]; then
   grep -E ':2[0-9]{3}': /etc/group.host >> /etc/group
 fi
 
+# Mount network drives - if defined in bind mount.
+if [ -r /srv/cifs/mounts ]; then
+  chown root:datascience /mnt
+  chmod 750 /mnt
+  while read line; do
+    service="$(echo "$line" | cut -d: -f1)"
+    mountpoint="$(echo "$line" | cut -d: -f2)"
+    mkdir "$mountpoint"
+    mount -t cifs -o credentials=/srv/cifs/credentials,noperm \
+      "$service" "$mountpoint" || true
+  done < /srv/cifs/mounts
+fi
+
 # Switch to USER - if environment variable defined.
 # Run sudo when calling apt or pip by creating wrapper scripts
 # in /usr/local/bin that call the real script with sudo.
