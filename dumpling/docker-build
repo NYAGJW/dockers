@@ -86,7 +86,7 @@ pip3 install --no-cache-dir \
 # TODO: automatically find the latest version of PhantomJS.
 # It would be nice to use the Debian package but there are bugs:
 # https://bugs.debian.org/cgi-bin/pkgreport.cgi?package=phantomjs
-wget --no-hsts -O phantomjs.tar.bz2 \
+wget --no-verbose --no-hsts -O phantomjs.tar.bz2 \
     https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
 tar --wildcards --strip-components=2 -xf phantomjs.tar.bz2 \
     'phantomjs*/bin/phantomjs'
