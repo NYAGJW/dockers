@@ -37,7 +37,11 @@ if [ -n "${USER-}" ]; then
   echo '#!/bin/sh\nexec sudo /usr/bin/pip3 "$@"' > /usr/local/bin/pip3
   chmod +x /usr/local/bin/pip3
   ln -fs pip3 /usr/local/bin/pip
-  cd "$(getent passwd "$USER" | cut -d: -f6)"
+  if [ -n "${OLDPWD-}" -a -d "${OLDPWD-}" ]; then
+    cd "$OLDPWD"
+  else
+    cd "$(getent passwd "$USER" | cut -d: -f6)"
+  fi
   exec gosu "$USER" "$@"
 else
   exec "$@"
