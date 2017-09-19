@@ -35,6 +35,7 @@ else
       -v /etc/passwd:/etc/passwd.host:ro \
       -v /srv/cifs:/srv/cifs:ro \
       -v "${SSH_AUTH_SOCK}":/tmp/ssh \
+      -e "OLDPWD=$(pwd)" \
       -e SSH_AUTH_SOCK=/tmp/ssh \
       -e "USER=${user}" \
       -e PORT1 -e PORT2 -e PORT3 -e PORT4 -e BOLTPORT -e NEOPORT \

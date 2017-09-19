@@ -25,6 +25,12 @@ else
 fi
 trap 'echo -ne "\e[0m"' DEBUG EXIT
 
+# Color command output.
+eval "$(dircolors -b)"
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias less='less -R'
+
 # Change to home directory.
 cd
 
