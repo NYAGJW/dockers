@@ -79,6 +79,7 @@ pip3 install --no-cache-dir \
     tensorflow \
     tox \
     unidecode \
+    xlrd \
     xmltodict \
     git+https://github.com/NYAG/oaglib.git
 
