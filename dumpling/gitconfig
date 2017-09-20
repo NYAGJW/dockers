@@ -1,3 +1,5 @@
+[core]
+	excludesFile = /srv/gitignore
 [fetch]
 	prune = true
 [pull]
