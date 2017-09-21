@@ -123,6 +123,7 @@ apt-get install -qy --no-install-recommends \
    p7zip-full \
    postgresql-client \
    procps \
+   shellcheck \
    sl \
    sudo \
    tree \
