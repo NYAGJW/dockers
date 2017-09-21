@@ -5,4 +5,4 @@
 
 set -eu
 
-exec docker stats $(docker ps --format={{.Names}}) "$@"
+docker ps '--format={{.Names}}' | xargs docker stats "$@"

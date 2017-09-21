@@ -42,7 +42,7 @@ pip3 install --no-cache-dir \
     emoji \
     Fiona \
     folium \
-    fuzzywuzzy[speedup] \
+    'fuzzywuzzy[speedup]' \
     geopandas \
     jupyter_contrib_nbextensions \
     line_profiler \

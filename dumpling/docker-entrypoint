@@ -32,12 +32,12 @@ fi
 # in /usr/local/bin that call the real script with sudo.
 if [ -n "${USER-}" ]; then
   usermod -a -G sudo "$USER"
-  echo '#!/bin/sh\nsudo /usr/bin/apt update && exec sudo /usr/bin/apt "$@"' > /usr/local/bin/apt
+  printf '#!/bin/sh\nsudo /usr/bin/apt update && exec sudo /usr/bin/apt "$@"' > /usr/local/bin/apt
   chmod +x /usr/local/bin/apt
-  echo '#!/bin/sh\nexec sudo /usr/bin/pip3 "$@"' > /usr/local/bin/pip3
+  printf '#!/bin/sh\nexec sudo /usr/bin/pip3 "$@"' > /usr/local/bin/pip3
   chmod +x /usr/local/bin/pip3
   ln -fs pip3 /usr/local/bin/pip
-  if [ -n "${OLDPWD-}" -a -d "${OLDPWD-}" ]; then
+  if [ -n "${OLDPWD-}" ] && [ -d "${OLDPWD-}" ]; then
     cd "$OLDPWD"
   else
     cd "$(getent passwd "$USER" | cut -d: -f6)"

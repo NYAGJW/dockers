@@ -1,0 +1,35 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks.git
+    sha: v0.9.4
+    hooks:
+    -   id: autopep8-wrapper
+    -   id: check-added-large-files
+    -   id: check-ast
+    -   id: check-byte-order-marker
+    -   id: check-case-conflict
+    -   id: check-docstring-first
+    -   id: check-executables-have-shebangs
+    -   id: check-json
+    -   id: check-merge-conflict
+    -   id: check-symlinks
+    -   id: check-xml
+    -   id: check-yaml
+    -   id: debug-statements
+    -   id: detect-private-key
+    -   id: double-quote-string-fixer
+    -   id: end-of-file-fixer
+    -   id: flake8
+        args: [--builtins=c]
+    -   id: forbid-new-submodules
+    -   id: name-tests-test
+    -   id: pretty-format-json
+    -   id: requirements-txt-fixer
+    -   id: sort-simple-yaml
+    -   id: trailing-whitespace
+
+-   repo: https://github.com/detailyang/pre-commit-shell.git
+    sha: 1.0.2
+    hooks:
+    -   id: shell-lint
+        files: ''
+        types: [shell]

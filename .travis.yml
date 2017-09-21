@@ -5,9 +5,11 @@ services:
 
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y openssh-client
+  - sudo apt-get install -y openssh-client shellcheck
+  - sudo pip install pre-commit
 
 script:
+  - pre-commit run --all-files
   - export PATH="$(pwd)/bin:$PATH"
   - docker build -t nyag/dumpling dumpling
   - dumpling whoami | grep "$(whoami)"
