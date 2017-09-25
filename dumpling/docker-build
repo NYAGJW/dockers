@@ -38,7 +38,7 @@ pip3 install --no-cache-dir \
     bokeh \
     civis \
     dash \
-    dedupe \
+    dedupe==1.7.9 \
     emoji \
     Fiona \
     folium \
