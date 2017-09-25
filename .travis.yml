@@ -7,6 +7,7 @@ before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y openssh-client shellcheck
   - sudo pip install pre-commit
+  - sudo sysctl net.ipv4.tcp_ecn=0
 
 script:
   - pre-commit run --all-files
