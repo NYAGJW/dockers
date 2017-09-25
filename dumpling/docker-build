@@ -99,6 +99,7 @@ rm phantomjs.tar.bz2
 # Install Debian packages for convenient CLI work.
 # bash-completion, cowsay, fortune* are used in bashrc.
 # cifs-utils, gosu are used in docker-entrypoint.
+# locales is needed to support UTF-8 locale, which is required by tmux.
 apt-get install -qy --no-install-recommends \
    bash-completion \
    bc \
@@ -116,6 +117,7 @@ apt-get install -qy --no-install-recommends \
    imagemagick \
    jq \
    less \
+   locales \
    lsof \
    man-db \
    nano \
@@ -128,6 +130,7 @@ apt-get install -qy --no-install-recommends \
    sl \
    sudo \
    tree \
+   tmux \
    vim \
    watch
 
@@ -143,6 +146,11 @@ echo '. /srv/bash_logout' >> /etc/bash.bash.logout
 ln -s /srv/gitconfig /etc/.
 mkdir /etc/jupyter
 ln -s /srv/jupyter_notebook_config.py /etc/jupyter/.
+
+# Default to UTF-8 locale.
+echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
+locale-gen
+update-locale LANG=en_US.UTF-8
 
 # Step 5 - Clean the dishes.
 apt-get clean
