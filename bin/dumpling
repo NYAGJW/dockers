@@ -25,7 +25,7 @@ fi
 user="${SUDO_USER-$USER}"
 name="${user}-dumpling"
 if [ -n "$(docker ps -q -f "name=${name}")" ]; then
-    exec docker exec -it -u "$user" "$name" /bin/bash
+    exec docker attach "$name"
 else
     exec docker run -it --rm --name "$name" \
       --network host --cap-add SYS_ADMIN --cap-add DAC_READ_SEARCH \
