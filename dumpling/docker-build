@@ -38,7 +38,7 @@ pip3 install --no-cache-dir \
     bokeh \
     civis \
     dash \
-    dedupe==1.7.9 \
+    dedupe \
     emoji \
     Fiona \
     folium \
@@ -53,7 +53,7 @@ pip3 install --no-cache-dir \
     nbdiff \
     neo4j-driver \
     nltk \
-    numpy \
+    numpy==1.13.1 \
     pandas \
     pandas-datareader \
     pdfminer.six \
