@@ -32,7 +32,7 @@ ln -s ../../bin/pip3 /usr/local/bin/pip
 
 # Step 2 - Pack the dumpling with lots of veggies and steam it.
 # Install Python packages for data science.
-pip3 install --no-cache-dir \
+pip3 install --no-cache-dir --upgrade \
     awscli \
     beautifulsoup4 \
     bokeh \
@@ -53,7 +53,7 @@ pip3 install --no-cache-dir \
     nbdiff \
     neo4j-driver \
     nltk \
-    numpy==1.13.1 \
+    numpy \
     pandas \
     pandas-datareader \
     pdfminer.six \
