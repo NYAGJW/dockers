@@ -22,6 +22,7 @@ apt-get install -qy --no-install-recommends \
    python3-wheel \
    tar \
    unixodbc-dev \
+   unzip \
    virtualenv \
    wget
 
