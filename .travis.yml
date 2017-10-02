@@ -12,13 +12,4 @@ script:
   - pre-commit run --all-files
   - export PATH="$(pwd)/bin:$PATH"
   - docker build -t nyag/dumpling dumpling
-  - dumpling whoami | grep "$(whoami)"
-  - dumpling python -c "import numpy as np; assert np.array([1]) + np.array([1]) == 2"
-  - dumpling python -c "import oaglib"
-  - dumpling bash -c 'pip install jenkspy && python -c "import jenkspy"'
-  - dumpling python -c "from selenium import webdriver; driver = webdriver.PhantomJS(); driver.get('https://www.google.com/'); driver.save_screenshot('test.png')"
-  - dumpling bash -c 'mkdir -p ~/.aws && echo -e "[default]\naws_access_key_id = dummy\naws_secret_access_key = dummy" > ~/.aws/credentials && aws s3 ls s3://irs-form-990/' | grep InvalidAccessKeyId
-  - dumpling bash -c 'tmux -c /bin/true'
-  - dumpling bash -c 'find /usr/local -name "libopenblas*.so"'
-  - dumpling bash -c 'find /usr/local -name "lapack*.so" -print0 | xargs -0 -r ldd' | grep openblas
-  - dumpling python -c 'import numpy as np; np.show_config()' | grep "'openblas'"
+  - dumpling-test
