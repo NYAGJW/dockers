@@ -36,6 +36,7 @@ pip3 install --no-cache-dir --upgrade \
     awscli \
     beautifulsoup4 \
     bokeh \
+    boto3 \
     civis \
     dash \
     dedupe \

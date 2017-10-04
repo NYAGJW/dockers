@@ -37,5 +37,5 @@ cd
 # Greet the user.
 if [ "$(id -u)" -ne 0 ]; then
   export PATH="$PATH:/usr/games"
-  cowsay -f daemon "$(fortune)"
+  fortune | cowsay -f bunny
 fi
