@@ -45,6 +45,7 @@ pip3 install --no-cache-dir --upgrade \
     folium \
     'fuzzywuzzy[speedup]' \
     geopandas \
+    jupyterlab \
     jupyter_contrib_nbextensions \
     line_profiler \
     lxml \
