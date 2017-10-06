@@ -9,6 +9,8 @@
 
 set -eu
 
+# Start the SSH authentication agent if it is not already running.
+# This is useful for holding and forwarding SSH keys.
 if [ -z "${SSH_AUTH_SOCK-}" ]; then
   eval "$(ssh-agent)" > /dev/null
 fi
@@ -22,8 +24,17 @@ if [ "${CI-}" != true ]; then
   -e '^latest' -e '^Digest' && true
 fi
 
+# Use the username of the user calling this script, via sudo or not,
+# when naming and running the Docker container.
 user="${SUDO_USER-$USER}"
 name="${user}-dumpling"
+
+if [ "$#" -ne 0 ]; then
+  # Arguments were provided - append a unique string to create
+  # a Docker container with a different name.
+  name="${name}-$(uuidgen | cut -d- -f1)"
+fi
+
 if [ -n "$(docker ps -q -f "name=${name}")" ]; then
     exec docker attach "$name"
 else
