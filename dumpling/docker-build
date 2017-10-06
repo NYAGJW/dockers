@@ -43,6 +43,7 @@ pip3 install --no-cache-dir \
     folium \
     fuzzywuzzy[speedup] \
     geopandas \
+    jupyterlab \
     jupyter_contrib_nbextensions \
     line_profiler \
     lxml \
@@ -81,6 +82,11 @@ pip3 install --no-cache-dir \
     unidecode \
     xmltodict \
     git+https://github.com/NYAG/oaglib.git
+
+# Install jupyterlab_bokeh extensions (which depends on npm)
+curl -sL https://deb.nodesource.com/setup_8.x | bash -
+apt-get install -qy --no-install-recommends nodejs
+# jupyter labextension install jupyterlab_bokeh
 
 # Install PhantomJS as a Selenium WebDriver.
 # TODO: automatically find the latest version of PhantomJS.
