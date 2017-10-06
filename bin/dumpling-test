@@ -5,8 +5,7 @@ set -euxo pipefail
 dumpling bash -c 'whoami' | grep "$(whoami)"
 
 # awscli
-dumpling bash -c 'mkdir -p ~/.aws && echo -e "[default]\naws_access_key_id = dummy\naws_secret_access_key = dummy" > ~/.aws/credentials && aws s3 ls s3://irs-form-990/' \
-  | grep InvalidAccessKeyId
+(dumpling bash -c 'AWS_ACCESS_KEY_ID=dummy AWS_SECRET_ACCESS_KEY=dummy aws s3 ls s3://irs-form-990/' || true) | grep InvalidAccessKeyId
 
 # jenkspy
 dumpling bash -c 'pip install jenkspy && python -c "import jenkspy"'
@@ -21,7 +20,7 @@ dumpling bash -c 'python -c "import numpy as np; np.show_config()"' | grep "'ope
 dumpling bash -c 'python -c "import oaglib"'
 
 # selenium
-dumpling bash -c 'python -c "from selenium import webdriver; driver = webdriver.PhantomJS(); driver.get('https://www.google.com/'); driver.save_screenshot('test.png')"'
+dumpling bash -c "python -c 'from selenium import webdriver; driver = webdriver.PhantomJS(); driver.get(\"https://example.com/\")'"
 
 # tmux
 dumpling bash -c 'tmux -c /bin/true'
