@@ -7,6 +7,12 @@ dumpling bash -c 'whoami' | grep "$(whoami)"
 # awscli
 (dumpling bash -c 'AWS_ACCESS_KEY_ID=dummy AWS_SECRET_ACCESS_KEY=dummy aws s3 ls s3://irs-form-990/' || true) | grep InvalidAccessKeyId
 
+# gdal
+dumpling bash -c 'python -c "from osgeo import gdal"'
+
+# git
+dumpling bash -c 'git --version' | grep 'git version 2\.'
+
 # jenkspy
 dumpling bash -c 'pip install jenkspy && python -c "import jenkspy"'
 
@@ -17,10 +23,21 @@ dumpling bash -c 'find /usr/local -name "lapack*.so" -print0 | xargs -0 -r ldd' 
 dumpling bash -c 'python -c "import numpy as np; np.show_config()"' | grep "'openblas'"
 
 # oaglib
-dumpling bash -c 'python -c "import oaglib"'
+dumpling bash -c 'python -c "from oaglib.db.redshift import getredshiftconnect"'
+
+# python
+dumpling bash -c 'python --version' | grep 'Python 3\.'
+dumpling bash -c 'python3 --version' | grep 'Python 3\.'
+dumpling bash -c 'pip --version' | grep 'python 3\.'
+dumpling bash -c 'pip3 --version' | grep 'python 3\.'
+
+# scipy
+dumpling bash -c 'python -c "from scipy.linalg import _fblas, _flapack"'
 
 # selenium
+! [ -f ghostdriver.log ]
 dumpling bash -c "python -c 'from selenium import webdriver; driver = webdriver.PhantomJS(); driver.get(\"https://example.com/\")'"
+rm ghostdriver.log
 
 # tmux
 dumpling bash -c 'tmux -c /bin/true'
