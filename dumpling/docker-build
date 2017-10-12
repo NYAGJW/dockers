@@ -6,6 +6,7 @@ set -eux
 # Install Python development tools, compilers, and build dependencies.
 # bzip2, tar, wget are needed to download phantomjs.
 # git is needed to download oaglib.
+# graphviz is needed for dask.dataframe.DataFrame.visualize
 # unixodbc-dev is needed to build pyodbc.
 # GDAL depends on specific versions of its C/C++ libraries, so just
 # install the Debian package instead of building from source.
@@ -15,6 +16,7 @@ apt-get install -qy --no-install-recommends \
    g++ \
    gcc \
    git \
+   graphviz \
    python3-dev \
    python3-gdal \
    python3-pip \
@@ -32,20 +34,26 @@ ln -s ../../bin/pip3 /usr/local/bin/pip
 
 # Step 2 - Pack the dumpling with lots of veggies and steam it.
 # Install Python packages for data science.
+# Cython needs to be installed first for fastparquet, used by dask.
+# We can remove fastparquet once dask fully supports pyarrow.
+pip3 install --no-cache-dir cython
 pip3 install --no-cache-dir --upgrade \
     awscli \
     beautifulsoup4 \
-    blaze \
     bokeh \
     boto3 \
+    cachey \
     civis \
     'dask[complete]' \
+    dask-searchcv \
     dedupe \
     emoji \
+    fastparquet \
     Fiona \
     folium \
     'fuzzywuzzy[speedup]' \
     geopandas \
+    graphviz \
     jupyterlab \
     jupyter_contrib_nbextensions \
     line_profiler \
@@ -65,10 +73,12 @@ pip3 install --no-cache-dir --upgrade \
     plotly \
     pre-commit \
     probablepeople \
+    pyarrow \
     pyodbc \
     PyPDF2 \
     pyproj \
     requests \
+    s3fs \
     scikit-image \
     scikit-learn \
     scipy \
@@ -83,6 +93,7 @@ pip3 install --no-cache-dir --upgrade \
     tenacity \
     tensorflow \
     tox \
+    ujson \
     unidecode \
     xlrd \
     xmltodict \
