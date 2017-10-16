@@ -1,10 +1,11 @@
 #!/bin/sh
 
 # Remove exited containers and dangling images.
+# Also try removing images from public registries.
 # In Docker 1.13+ you can instead run `docker system prune`,
 # which also deletes volumes not attached to a container.
 
-set -eu
-
 docker ps -q -f status=exited | xargs -r docker rm
 docker images -q -f dangling=true | xargs -r docker rmi
+docker images -q 'docker.io/*' | xargs -r docker rmi
+docker images -q 'gcr.io/*' | xargs -r docker rmi
