@@ -65,7 +65,6 @@ pip3 install --no-cache-dir --upgrade \
     neo4j-driver \
     nltk \
     numpy \
-    odo \
     pandas \
     pandas-datareader \
     pdfminer.six \
