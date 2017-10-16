@@ -7,6 +7,10 @@ dumpling bash -c 'whoami' | grep "$(whoami)"
 # awscli
 (dumpling bash -c 'AWS_ACCESS_KEY_ID=dummy AWS_SECRET_ACCESS_KEY=dummy aws s3 ls s3://irs-form-990/' || true) | grep InvalidAccessKeyId
 
+# dask
+dumpling bash -c "python -c 'import dask.dataframe as dd; import pandas as pd; dd.from_pandas(pd.DataFrame(), npartitions=3).compute()'"
+dumpling bash -c "python -c 'import dask.dataframe as dd; import pandas as pd; dd.from_pandas(pd.DataFrame(), npartitions=3).visualize(\"/tmp/mydask\")'"
+
 # gdal
 dumpling bash -c 'python -c "from osgeo import gdal"'
 
