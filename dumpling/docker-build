@@ -48,6 +48,7 @@ pip3 install --no-cache-dir --upgrade \
     dask-searchcv \
     dedupe \
     dedupe-variable-address \
+    dedupe-variable-name \
     emoji \
     fastparquet \
     Fiona \
