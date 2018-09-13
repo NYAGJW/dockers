@@ -10,22 +10,30 @@ set -eux
 # unixodbc-dev is needed to build pyodbc.
 # GDAL depends on specific versions of its C/C++ libraries, so just
 # install the Debian package instead of building from source.
+
 apt-get -qq update
 apt-get install -qy --no-install-recommends \
    bzip2 \
    g++ \
    gcc \
    git \
+   gpg \
    graphviz \
    python3-dev \
    python3-gdal \
    python3-pip \
    python3-setuptools \
    python3-wheel \
+   software-properties-common \
+   snapd \
    tar \
    unixodbc-dev \
    virtualenv \
    wget
+
+add-apt-repository ppa:lazygit-team/daily
+apt-get update
+apt-get install --allow-unauthenticated lazygit
 
 # Create a symlink from python/pip to Python 3,
 # since we are not using Python 2.
