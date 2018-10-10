@@ -63,6 +63,7 @@ pip3 install --no-cache-dir --upgrade \
     jupyter_contrib_nbextensions \
     line_profiler \
     lxml \
+    nameparser \
     notebook \
     matplotlib \
     memory_profiler \
